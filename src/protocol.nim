@@ -43,7 +43,7 @@ when isMainModule:
     except:
       # If any other exception occurs in this block, this should fail.
       doAssert false
-    block:
-      # Add a test to make sure createMessages pass and assert to true.
-      let expected = """{"username":"dom","message":"hello"}""" & "\c\l"
-      doAssert createMessage("dom", "hello") == expected
+  block:
+    # Add a test to make sure createMessages pass and assert to true.
+    let expected = """{"username":"dom","message":"hello"}""" & "\c\l"
+    doAssert createMessage("dom", "hello") == expected
