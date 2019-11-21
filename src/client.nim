@@ -15,12 +15,13 @@ echo("Chat application started")
 if paramCount() == 0:
   quit("Please specify the server address, e.g. ./client localhost")
 let serverAddr = paramStr(1)
+let username = paramStr(2)
 var socket = newAsyncSocket()
 asyncCheck connect(socket, serverAddr)
 var messageFlowVar = spawn stdin.readLine()
 while true:
   if messageFlowVar.isReady():
-    let message = createMessage("Anonymous", ^messageFlowVar)
+    let message = createMessage(username, ^messageFlowVar)
     asyncCheck socket.send(message)
     messageFlowVar = spawn stdin.readLine()
   asyncdispatch.poll()
