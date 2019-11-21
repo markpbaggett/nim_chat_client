@@ -31,6 +31,9 @@ proc processMessages(server: Server, client: Client) {.async.} =
       client.socket.close()
       return # Stop further processing of messages
     echo (client, " sent: ", line)
+    for c in server.clients:
+      if c.id != client.id and c.connected: # if not the client, send message to other clients
+        await c.socket.send(line & "\c\l")
 
 
 # Add async code
